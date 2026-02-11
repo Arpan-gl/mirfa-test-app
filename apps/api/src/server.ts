@@ -1,7 +1,5 @@
-import 'dotenv/config';
-import Fastify from 'fastify';
-import cors from '@fastify/cors';
-import { registerTxRoutes } from './routes/tx.js';
+import 'dotenv/config'
+import { buildApp } from '../src/app.js'
 
 // Validate MASTER_KEY at startup
 if (!process.env.MASTER_KEY) {
@@ -9,25 +7,13 @@ if (!process.env.MASTER_KEY) {
   process.exit(1);
 }
 
-const PORT = parseInt(process.env.PORT || '3001', 10);
+let app: any
 
-const fastify = Fastify({
-  logger: true
-});
+export default async function handler(req: any, res: any) {
+  if (!app) {
+    app = await buildApp()
+    await app.ready()
+  }
 
-// Register CORS
-await fastify.register(cors, {
-  origin: true // Allow all origins in development
-});
-
-// Register routes
-await registerTxRoutes(fastify);
-
-// Start server
-try {
-  await fastify.listen({ port: PORT, host: '0.0.0.0' });
-  console.log(`✅ API server running on http://localhost:${PORT}`);
-} catch (err) {
-  fastify.log.error(err);
-  process.exit(1);
+  app.server.emit('request', req, res)
 }
