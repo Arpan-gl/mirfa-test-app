@@ -2,12 +2,16 @@
   "name": "@mirfa/crypto",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
+  "scripts": { "build": "tsc", "dev": "tsc --watch" },
   "devDependencies": {
     "@mirfa/tsconfig": "workspace:*",
     "@types/node": "^20.11.0",
