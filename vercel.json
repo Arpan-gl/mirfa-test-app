@@ -1,15 +1,17 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "apps/api/dist/server.js",
-      "use": "@vercel/node"
+  "buildCommand": "turbo run build --filter=@mirfa/api",
+  "outputDirectory": "apps/api/dist",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "functions": {
+    "apps/api/src/server.ts": {
+      "runtime": "nodejs20.x"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "apps/api/dist/server.js"
+      "source": "/(.*)",
+      "destination": "/apps/api/src/server.ts"
     }
   ]
 }
