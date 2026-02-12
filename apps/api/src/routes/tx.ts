@@ -14,6 +14,11 @@ interface TxParams {
 }
 
 export async function registerTxRoutes(fastify: FastifyInstance) {
+  // GET /
+  fastify.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
+    return reply.send({ message: 'Welcome to the Mirfa API!' });
+  });
+
   // POST /tx/encrypt
   fastify.post<{ Body: EncryptRequestBody }>(
     '/tx/encrypt',
