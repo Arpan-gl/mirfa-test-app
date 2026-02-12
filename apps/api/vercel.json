@@ -1,15 +1,30 @@
 {
+<<<<<<< HEAD:apps/api/vercel.json
   "version": 2,
   "builds": [
     {
       "src": "dist/server.js",
       "use": "@vercel/node"
+=======
+  "buildCommand": "turbo run build --filter=@mirfa/api",
+  "outputDirectory": "apps/api/dist",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "functions": {
+    "apps/api/src/server.ts": {
+      "runtime": "nodejs20.x"
+>>>>>>> 44cfebfa3d2872aef6c0bad896207e962bac823c:vercel.json
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
+<<<<<<< HEAD:apps/api/vercel.json
       "src": "/(.*)",
       "dest": "dist/server.js"
+=======
+      "source": "/(.*)",
+      "destination": "/apps/api/src/server.ts"
+>>>>>>> 44cfebfa3d2872aef6c0bad896207e962bac823c:vercel.json
     }
   ]
 }
