@@ -18,7 +18,12 @@ export default async function handler(req: any, res: any) {
     })
 
     res.status(response.statusCode)
-    res.headers(response.headers)
+    
+    // Set headers properly
+    Object.entries(response.headers).forEach(([key, value]) => {
+      res.setHeader(key, value)
+    })
+    
     res.send(response.payload)
   } catch (error) {
     console.error('Handler error:', error)
